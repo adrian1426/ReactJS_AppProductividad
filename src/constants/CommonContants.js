@@ -1,0 +1,1 @@
+export const httpOk = 200;

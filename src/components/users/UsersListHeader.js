@@ -5,7 +5,8 @@ import styles from './UsersListHeader.module.css';
 
 const Header = styled('header')(({ theme }) => ({
   backgroundColor: theme.palette.secondary.main,
-  padding: '10px',
+  padding: '5px',
+  height: '40px'
 }));
 
 const UsersListHeader = () => {

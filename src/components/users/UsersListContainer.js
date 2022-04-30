@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
+import { httpOk } from '../../constants/CommonContants';
 import { getUsers } from '../../services/UserService';
+import UsersList from './UsersList';
 import UsersListHeader from './UsersListHeader';
 
 const UsersListContainer = () => {
@@ -7,9 +9,13 @@ const UsersListContainer = () => {
 
   const _getUsers = async () => {
     const response = await getUsers();
-    // const data = await response.json();
 
-    console.log(response);
+    if (response.status === httpOk) {
+      const data = await response.json();
+      setUsers(data);
+    } else {
+      setUsers([])
+    }
   };
 
   useEffect(() => {
@@ -17,9 +23,10 @@ const UsersListContainer = () => {
   }, []);
 
   return (
-    <div>
+    <>
       <UsersListHeader />
-    </div>
+      <UsersList users={users} />
+    </>
   );
 };
 
