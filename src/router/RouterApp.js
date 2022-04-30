@@ -10,6 +10,7 @@ const RouterApp = () => {
   return (
     <Suspense fallback={<Loader open={true} />}>
       <Routes>
+        <Route index element={<TaskListPage />} />
         <Route path={TASK_LIST_PAGE} element={<TaskListPage />} />
         <Route path={TASK_REPORT_PAGE} element={<TaskReportPage />} />
       </Routes>

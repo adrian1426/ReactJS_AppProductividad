@@ -1,5 +1,6 @@
 import UsersListContainer from "./components/users/UsersListContainer";
 import { useAuth } from './hooks/useAuth';
+import RouterApp from "./router/RouterApp";
 
 function App() {
   const isLogged = useAuth();
@@ -10,7 +11,7 @@ function App() {
 
   return (
     <div>
-      Lista de tareas
+      <RouterApp />
     </div>
   );
 }
