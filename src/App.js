@@ -1,9 +1,16 @@
 import UsersListContainer from "./components/users/UsersListContainer";
+import { useAuth } from './hooks/useAuth';
 
 function App() {
+  const isLogged = useAuth();
+
+  if (!isLogged) {
+    return <UsersListContainer />;
+  }
+
   return (
     <div>
-      <UsersListContainer />
+      Lista de tareas
     </div>
   );
 }
