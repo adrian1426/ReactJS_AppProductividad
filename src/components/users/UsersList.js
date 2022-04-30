@@ -20,7 +20,7 @@ const UsersList = props => {
           {
             users.map(user => (
               <Li
-                onClick={() => console.log(user._id)}
+                onClick={() => console.log(user)}
                 key={user._id}
               >
                 {`${user.nombre} ${user.apellido}`}
