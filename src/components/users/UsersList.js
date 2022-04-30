@@ -1,6 +1,7 @@
 import { Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import Container from '../commons/Container';
+import Li from '../commons/Li';
 
 const UsersList = props => {
   const { users } = props;
@@ -9,18 +10,21 @@ const UsersList = props => {
     <Container>
       <div>
         <Typography
+          variant='h5'
+          color='primary'
         >
-          Seleccione su usuario para iniciar sus actividades
+          Seleccione su usuario
         </Typography>
 
         <ul>
           {
             users.map(user => (
-              <li
+              <Li
+                onClick={() => console.log(user._id)}
                 key={user._id}
               >
                 {`${user.nombre} ${user.apellido}`}
-              </li>
+              </Li>
             ))
           }
         </ul>
