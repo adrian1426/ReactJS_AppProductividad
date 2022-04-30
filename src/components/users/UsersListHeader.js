@@ -1,10 +1,17 @@
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
+import { styled } from '@mui/material/styles';
 import { Typography } from '@mui/material';
 import styles from './UsersListHeader.module.css';
 
+const Header = styled('header')(({ theme }) => ({
+  backgroundColor: theme.palette.secondary.main,
+  padding: '10px',
+}));
+
 const UsersListHeader = () => {
   return (
-    <header>
+    <Header
+    >
       <div className={styles['header-data']}>
         <AssignmentTurnedInIcon
           fontSize='large'
@@ -17,7 +24,7 @@ const UsersListHeader = () => {
           App de Productividad
         </Typography>
       </div>
-    </header>
+    </Header>
   );
 };
 
