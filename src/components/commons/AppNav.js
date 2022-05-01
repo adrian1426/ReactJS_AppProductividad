@@ -5,6 +5,7 @@ import { Button, Typography } from '@mui/material';
 import { userSelected } from '../../constants/CommonContants';
 import NavLinkActive from './NavLinkActive';
 import { TASK_LIST_PAGE, TASK_REPORT_PAGE } from '../../constants/RoutesConstants';
+import styles from './AppNav.module.css';
 
 const AppNav = () => {
   const user = JSON.parse(localStorage.getItem(userSelected))
@@ -13,19 +14,9 @@ const AppNav = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <div style={{
-            width: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between'
-          }}>
-            <div style={{ display: 'flex' }}>
-              <Typography
-                style={{
-                  fontWeight: 'bold',
-                  marginRight: '10px'
-                }}
-              >
+          <div className={styles.nav}>
+            <div className={styles.nav_menu}>
+              <Typography className={styles.nav_menu_user}>
                 {user.nombre} {user.apellido}
               </Typography>
 
@@ -41,6 +32,7 @@ const AppNav = () => {
             <Button
               color="secondary"
               variant="contained"
+              className={styles.nav_menu_salir}
             >
               Salir
             </Button>
