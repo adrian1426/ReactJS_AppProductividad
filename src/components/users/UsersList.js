@@ -6,15 +6,19 @@ import Li from '../commons/Li';
 import UserContext from '../../context/UserContext';
 import { userSelected } from '../../constants/CommonContants';
 import { addUserAction } from '../../context/user/userAction';
+import { useNavigate } from 'react-router-dom';
+import { TASK_LIST_PAGE } from '../../constants/RoutesConstants';
 
 const UsersList = props => {
   const { users } = props;
   const { dispatch } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const selectedUser = (user) => {
     dispatch(addUserAction(user));
 
     localStorage.setItem(userSelected, JSON.stringify(user));
+    navigate(TASK_LIST_PAGE);
   };
 
 
