@@ -1,17 +1,22 @@
-import { PhotoCamera } from '@mui/icons-material';
+import styled from '@emotion/styled';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { IconButton, TextField } from '@mui/material';
 import React from 'react';
 import { statusTarea, timeTask } from '../../../constants/FilterConstants';
 import SelectCustom from '../../commons/SelectCustom';
 
+const Searcher = styled('div')(({ theme }) => ({
+  background: theme.palette.common.white,
+  margin: '2%',
+  padding: '10px',
+  display: 'flex',
+  justifyContent: 'space-around',
+  alignItems: 'center'
+}));
+
 const TaskListSearcher = () => {
   return (
-    <div style={{
-      margin: '2%',
-      padding: '10px',
-      background: '#EEEEEE',
-      display: 'flex'
-    }}>
+    <Searcher>
       <TextField
         label="Buscar tarea"
         variant="outlined"
@@ -19,7 +24,7 @@ const TaskListSearcher = () => {
       />
 
       <SelectCustom
-        label='Filtrar tareas'
+        label='Filtrar estatus tareas'
         data={statusTarea}
       />
 
@@ -28,10 +33,15 @@ const TaskListSearcher = () => {
         data={timeTask}
       />
 
-      <IconButton color="primary" aria-label="upload picture" component="span">
-        <PhotoCamera />
+      <IconButton
+        color="primary"
+        component="span"
+      >
+        <AddCircleIcon
+          fontSize='large'
+        />
       </IconButton>
-    </div>
+    </Searcher>
   );
 };
 
