@@ -4,7 +4,7 @@ import { useAuth } from './hooks/useAuth';
 import RouterApp from "./router/RouterApp";
 
 function App() {
-  const isLogged = useAuth();
+  const { isLogged } = useAuth();
 
   if (!isLogged) {
     return <UsersListContainer />;

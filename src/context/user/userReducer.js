@@ -1,4 +1,5 @@
 import { addUser, removeUser } from './userType';
+import { initialState } from './userInitialState';
 
 const userReducer = (state, action) => {
   switch (action.type) {
@@ -7,7 +8,7 @@ const userReducer = (state, action) => {
         ...action.payload
       };
     case removeUser:
-      return {};
+      return initialState;
     default:
       return state;
   }

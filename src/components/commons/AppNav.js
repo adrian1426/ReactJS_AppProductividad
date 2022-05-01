@@ -4,10 +4,12 @@ import Container from '@mui/material/Container';
 import { Button, Typography } from '@mui/material';
 import { userSelected } from '../../constants/CommonContants';
 import NavLinkActive from './NavLinkActive';
+import { useAuth } from '../../hooks/useAuth';
 import { TASK_LIST_PAGE, TASK_REPORT_PAGE } from '../../constants/RoutesConstants';
 import styles from './AppNav.module.css';
 
 const AppNav = () => {
+  const { logout } = useAuth();
   const user = JSON.parse(localStorage.getItem(userSelected))
 
   return (
@@ -17,7 +19,7 @@ const AppNav = () => {
           <div className={styles.nav}>
             <div className={styles.nav_menu}>
               <Typography className={styles.nav_menu_user}>
-                {user.nombre} {user.apellido}
+                {user?.nombre} {user?.apellido}
               </Typography>
 
               <NavLinkActive to={TASK_LIST_PAGE}>
@@ -33,6 +35,7 @@ const AppNav = () => {
               color="secondary"
               variant="contained"
               className={styles.nav_menu_salir}
+              onClick={logout}
             >
               Salir
             </Button>
