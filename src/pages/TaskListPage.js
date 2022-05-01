@@ -1,9 +1,10 @@
 import ContainerTasks from "../components/commons/ContainerTasks";
+import TaskListContainer from "../components/tasks/tasklist/TaskListContainer";
 
 const TaskListPage = () => {
   return (
     <ContainerTasks>
-      TaskListPage
+      <TaskListContainer />
     </ContainerTasks>
   );
 };
