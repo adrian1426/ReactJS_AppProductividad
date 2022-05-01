@@ -1,3 +1,4 @@
+import AppNav from "./components/commons/AppNav";
 import UsersListContainer from "./components/users/UsersListContainer";
 import { useAuth } from './hooks/useAuth';
 import RouterApp from "./router/RouterApp";
@@ -11,6 +12,7 @@ function App() {
 
   return (
     <div>
+      <AppNav />
       <RouterApp />
     </div>
   );

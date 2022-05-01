@@ -13,7 +13,7 @@ const theme = createTheme({
     },
     secondary: {
       main: colorSecondary,
-      contrastText: colorPrimary
+      contrastText: colorCommonWhite
     },
     common: {
       white: colorCommonWhite,
