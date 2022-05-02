@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { TextField } from "@mui/material";
+import { convertHMS } from "../../../helpers";
 import styles from './TaskListCard.module.css';
 import TaskListCardControls from "./TaskListCardControls";
 import TaskListCardInfo from "./TaskListCardInfo";
@@ -15,9 +16,7 @@ const CardContent = styled('div')(({ theme }) => ({
 const TaskListCard = props => {
   const { tarea } = props;
 
-  console.log(tarea);
-
-  const timeShow = tarea.estatus.id === 1 ? tarea.tiempo.programado : tarea.tiempo.actual;
+  const timeShow = tarea.estatus.id === 1 ? convertHMS(tarea.tiempo.programado) : convertHMS(tarea.tiempo.actual);
   const colorBoder = tarea.estatus.id === 1 ? '#00A6FF' : tarea.estatus.id === 2 ? '#FF8C32' : '#4CA22A';
 
   return (
