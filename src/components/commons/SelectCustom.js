@@ -12,6 +12,7 @@ const SelectCustom = props => {
       <Select
         label={label}
         defaultValue={defaultValue}
+        {...props}
       >
         {
           data.map(d => {
