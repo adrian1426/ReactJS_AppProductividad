@@ -2,6 +2,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: end;
+  align-items: flex-end;
   margin: 8px 0px;
 }
