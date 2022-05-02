@@ -1,0 +1,13 @@
+.card_titulo {
+  margin: 0px;
+}
+
+.card_time {
+  display: flex;
+  justify-content: space-between;
+  margin: 6px 0px;
+}
+
+.card_details {
+  background: #fff;
+}

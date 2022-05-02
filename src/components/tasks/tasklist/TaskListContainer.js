@@ -37,7 +37,7 @@ const TaskListContainer = () => {
   return (
     <div style={{ width: '100%' }}>
       <TaskListSearcher />
-      <TaskList />
+      <TaskList tareas={tareas} />
     </div>
   );
 };
