@@ -29,7 +29,9 @@ const TaskListCard = props => {
       <hr />
 
       <div className={styles.card_time}>
-        <label >Tarea {tarea.estatus.descripcion}</label>
+        <label style={{ color: colorBoder }}>
+          Tarea <strong>{tarea.estatus.descripcion}</strong>
+        </label>
         <label ><strong>{timeShow}</strong></label>
       </div>
 
@@ -43,7 +45,7 @@ const TaskListCard = props => {
       />
 
       <TaskListCardInfo tarea={tarea} />
-      <TaskListCardControls />
+      <TaskListCardControls tarea={tarea} />
     </CardContent>
   );
 };
