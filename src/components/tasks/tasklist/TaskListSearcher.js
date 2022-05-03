@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { IconButton, TextField } from '@mui/material';
+import { IconButton, TextField, Tooltip } from '@mui/material';
 import React from 'react';
 import { statusTarea, timeTask } from '../../../constants/FilterConstants';
 import SelectCustom from '../../commons/SelectCustom';
@@ -17,7 +17,7 @@ const Searcher = styled('div')(({ theme }) => ({
 }));
 
 const TaskListSearcher = (props) => {
-  const { setSearchTitle, setSearchStatus, setSearchTime } = props;
+  const { setSearchTitle, setSearchStatus, setSearchTime, setOpenDialog } = props;
 
   const handleChangeTarea = debounce((e) => {
     setSearchTitle(e.target.value);
@@ -29,6 +29,10 @@ const TaskListSearcher = (props) => {
 
   const handleChangeTime = e => {
     setSearchTime(e.target.value);
+  };
+
+  const addTask = () => {
+    setOpenDialog(true);
   };
 
   return (
@@ -52,14 +56,17 @@ const TaskListSearcher = (props) => {
         onChange={handleChangeTime}
       />
 
-      <IconButton
-        color="primary"
-        component="span"
-      >
-        <AddCircleIcon
-          fontSize='large'
-        />
-      </IconButton>
+      <Tooltip title="Agregar tarea">
+        <IconButton
+          color="primary"
+          component="span"
+          onClick={addTask}
+        >
+          <AddCircleIcon
+            fontSize='large'
+          />
+        </IconButton>
+      </Tooltip>
     </Searcher>
   );
 };
@@ -67,7 +74,8 @@ const TaskListSearcher = (props) => {
 TaskListSearcher.propTypes = {
   setSearchTitle: PropTypes.func.isRequired,
   setSearchStatus: PropTypes.func.isRequired,
-  setSearchTime: PropTypes.func.isRequired
+  setSearchTime: PropTypes.func.isRequired,
+  setOpenDialog: PropTypes.func.isRequired
 };
 
 export default TaskListSearcher;
