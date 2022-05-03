@@ -1,4 +1,5 @@
 import { Button, ButtonGroup } from '@mui/material';
+import PropTypes from 'prop-types';
 import styles from './TaskListCardControls.module.css';
 
 const TaskListCardControls = props => {
@@ -49,6 +50,10 @@ const TaskListCardControls = props => {
       </div>
     </div>
   );
+};
+
+TaskListCardControls.propTypes = {
+  tarea: PropTypes.object.isRequired
 };
 
 export default TaskListCardControls;

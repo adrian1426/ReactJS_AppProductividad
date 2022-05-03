@@ -4,6 +4,7 @@ import { convertHMS } from "../../../helpers";
 import styles from './TaskListCard.module.css';
 import TaskListCardControls from "./TaskListCardControls";
 import TaskListCardInfo from "./TaskListCardInfo";
+import PropTypes from 'prop-types';
 
 const CardContent = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.common.black,
@@ -48,6 +49,10 @@ const TaskListCard = props => {
       <TaskListCardControls tarea={tarea} />
     </CardContent>
   );
+};
+
+TaskListCard.propTypes = {
+  tarea: PropTypes.object.isRequired
 };
 
 export default TaskListCard;

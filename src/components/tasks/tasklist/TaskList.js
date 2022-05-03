@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import TaskListCard from "./TaskListCard";
+import PropTypes from 'prop-types';
 
 const ContainerCards = styled('div')(({ theme }) => ({
   background: theme.palette.common.white,
@@ -21,6 +22,10 @@ const TaskList = props => {
       }
     </ContainerCards>
   );
+};
+
+TaskList.propTypes = {
+  tareas: PropTypes.array.isRequired
 };
 
 export default TaskList;

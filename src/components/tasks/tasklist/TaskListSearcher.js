@@ -5,6 +5,7 @@ import React from 'react';
 import { statusTarea, timeTask } from '../../../constants/FilterConstants';
 import SelectCustom from '../../commons/SelectCustom';
 import debounce from "just-debounce-it";
+import PropTypes from 'prop-types';
 
 const Searcher = styled('div')(({ theme }) => ({
   background: theme.palette.common.white,
@@ -61,6 +62,12 @@ const TaskListSearcher = (props) => {
       </IconButton>
     </Searcher>
   );
+};
+
+TaskListSearcher.propTypes = {
+  setSearchTitle: PropTypes.func.isRequired,
+  setSearchStatus: PropTypes.func.isRequired,
+  setSearchTime: PropTypes.func.isRequired
 };
 
 export default TaskListSearcher;
