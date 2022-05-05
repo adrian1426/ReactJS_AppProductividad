@@ -9,12 +9,20 @@ import { formTime } from '../../../constants/FilterConstants';
 const TaskForm = (props) => {
   const { open, handleClose } = props;
 
+  const _handleClose = () => {
+    handleClose();
+  };
+
   return (
     <DialogCommon
       title='Agregar Tarea'
       open={open}
-      handleClose={handleClose}
-      actions={<TaskFormActions />}
+      handleClose={_handleClose}
+      actions={
+        <TaskFormActions
+          handleClose={handleClose}
+        />
+      }
     >
       <div>
         <TextField
