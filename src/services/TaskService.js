@@ -14,3 +14,22 @@ export const getTasksByUserId = async (userId, query) => {
     return error;
   }
 };
+
+export const addTarea = async (tarea) => {
+  try {
+    const response = await fetch(
+      `${api}/tarea`,
+      {
+        method: 'POST',
+        body: JSON.stringify(tarea),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
