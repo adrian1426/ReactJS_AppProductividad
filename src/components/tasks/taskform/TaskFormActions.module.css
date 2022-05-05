@@ -1,0 +1,8 @@
+.actions {
+  width: 100%;
+  display: flex;
+}
+
+.actions_button {
+  margin: 5px;
+}
