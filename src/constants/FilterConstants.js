@@ -14,5 +14,12 @@ export const timeTask = [
   { id: 3, value: 'Mas de 1 hora' }
 ];
 
+export const formTime = [
+  { id: 1800, value: '30 minutos' },
+  { id: 2700, value: '45 minutos' },
+  { id: 3600, value: '1 hora' },
+  { id: 0, value: 'otro' }
+];
+
 export const limitDefault = 10;
 export const skipDefault = 0;

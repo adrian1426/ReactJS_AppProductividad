@@ -1,0 +1,9 @@
+.form_text {
+  margin: 5px 0px;
+}
+
+.form_timer {
+  display: flex;
+  align-items: center;
+  margin: 10px 0px 3px 0px;
+}
