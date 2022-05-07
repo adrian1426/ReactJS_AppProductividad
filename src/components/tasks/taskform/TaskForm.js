@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useRef } from 'react';
 import { TextField } from '@mui/material';
 import DialogCommon from '../../commons/DialogCommon';
 import TaskFormActions from './TaskFormActions';
@@ -8,21 +8,19 @@ import { formTime } from '../../../constants/FilterConstants';
 import UserContext from '../../../context/UserContext';
 import { addTarea } from '../../../services/TaskService';
 import { httpCreated } from '../../../constants/CommonContants';
-
-const initialState = {
-  title: '',
-  description: '',
-  time: 0
-};
+import { initialState, initialStateErr, _objTarea } from './TaskForm.util';
 
 const TaskForm = (props) => {
-  const [tarea, setTarea] = useState(initialState);
-  const { state } = useContext(UserContext);
   const { open, handleClose, getTasksService } = props;
+  const [tarea, setTarea] = useState(initialState);
+  const [errors, setErrors] = useState(initialStateErr);
+  const { state } = useContext(UserContext);
+  const timeTextRef = useRef();
 
   const _handleClose = () => {
     handleClose();
     setTarea(initialState);
+    setErrors(initialStateErr);
   };
 
   const handleChange = e => {
@@ -33,36 +31,42 @@ const TaskForm = (props) => {
     });
   };
 
+  const handlechangeSelectTime = e => {
+    setTarea({
+      ...tarea,
+      time: (e.target.value / 60)
+    });
+
+    if (e.target.value !== 0) {
+      timeTextRef.current.disabled = true;
+    } else {
+      timeTextRef.current.disabled = false;
+    }
+  };
+
   const _addTarea = async (tareaValue) => {
     const response = await addTarea(tareaValue);
 
     if (response.status === httpCreated) {
-      const data = await response.json();
       _handleClose();
       getTasksService();
-      console.log(data);
     } else {
       console.log('Error al agregar nueva tarea: ', response);
     }
   };
 
   const handleAddTarea = () => {
-    const objTarea = {
-      titulo: tarea.title,
-      descripcion: tarea.description,
-      estatus: {
-        id: 1,
-        descripcion: 'Programado'
-      },
-      tiempo: {
-        programado: tarea.time * 60,
-        transcurrido: 0,
-        actual: 0
-      },
-      usuario: state._id
-    };
+    const objTarea = _objTarea(tarea, state);
 
-    _addTarea(objTarea);
+    if (tarea.title && tarea.description && (tarea.time > 0 && tarea.time <= 120)) {
+      _addTarea(objTarea);
+    } else {
+      setErrors({
+        title: tarea.title ? false : true,
+        description: tarea.description ? false : true,
+        time: (tarea.time > 0 && tarea.time <= 120) ? false : true
+      });
+    }
   };
 
   return (
@@ -87,6 +91,7 @@ const TaskForm = (props) => {
           value={tarea.title}
           onChange={handleChange}
           name='title'
+          error={errors.title}
         />
 
         <TextField
@@ -98,12 +103,18 @@ const TaskForm = (props) => {
           value={tarea.description}
           onChange={handleChange}
           name='description'
+          error={errors.description}
         />
+
+        <small style={{ color: '#BBB' }}>
+          El tiempo máximo permitido es de 120 minutos
+        </small>
 
         <div className={styles.form_timer}>
           <SelectCustom
             label='Agregar tiempo'
             data={formTime}
+            onChange={handlechangeSelectTime}
             style={{
               width: '100%'
             }}
@@ -117,6 +128,8 @@ const TaskForm = (props) => {
             value={tarea.time}
             onChange={handleChange}
             name='time'
+            inputRef={timeTextRef}
+            error={errors.time}
           />
         </div>
       </div>
