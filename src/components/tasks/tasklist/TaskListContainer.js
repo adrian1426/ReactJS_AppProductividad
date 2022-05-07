@@ -60,6 +60,7 @@ const TaskListContainer = () => {
       />
       <TaskList
         tareas={tareas}
+        getTasksService={_getTasksByUserId}
       />
       <TaskForm
         open={openDialog}

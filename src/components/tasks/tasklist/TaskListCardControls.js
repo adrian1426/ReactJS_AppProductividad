@@ -1,12 +1,31 @@
-import { Button, ButtonGroup } from '@mui/material';
+import { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { Button, ButtonGroup } from '@mui/material';
+import { httpOk } from '../../../constants/CommonContants';
+import { deleteTareaById } from '../../../services/TaskService';
+import SnackContext from '../../../context/SnackContext';
 import styles from './TaskListCardControls.module.css';
 
 const TaskListCardControls = props => {
-  const { tarea } = props;
+  const { tarea, getTasksService } = props;
+  const { setSnack } = useContext(SnackContext);
+
+  const _deleteTareaById = async () => {
+    const response = await deleteTareaById(tarea._id);
+
+    if (response.status === httpOk) {
+      getTasksService();
+      setSnack({ open: true, severity: 'info', msg: '¡Tarea eliminada correctamente!' });
+    } else {
+      setSnack({ open: true, severity: 'error', msg: `¡Error al eliminar tarea! - ${response?.text}` });
+    }
+  };
 
   const lblBtnPrimary = tarea.estatus.id === 1 ? 'Iniciar' :
     tarea.estatus.id === 2 ? 'Terminar' : 'Eliminar';
+
+  const funBtnPrimary = tarea.estatus.id === 1 ? () => console.log('Iniciar') :
+    tarea.estatus.id === 2 ? () => console.log('Terminar') : _deleteTareaById;
 
   return (
     <div>
@@ -20,7 +39,9 @@ const TaskListCardControls = props => {
           }
           {
             tarea.estatus.id !== 3 && (
-              <Button>Eliminar</Button>
+              <Button onClick={_deleteTareaById}>
+                Eliminar
+              </Button>
             )
           }
         </ButtonGroup>
@@ -44,6 +65,7 @@ const TaskListCardControls = props => {
           className={styles.controls_button}
           variant='contained'
           fullWidth
+          onClick={funBtnPrimary}
         >
           {lblBtnPrimary}
         </Button>
