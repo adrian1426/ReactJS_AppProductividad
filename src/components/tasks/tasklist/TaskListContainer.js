@@ -15,6 +15,7 @@ const TaskListContainer = () => {
   const [searchStatus, setSearchStatus] = useState(0);
   const [searchTime, setSearchTime] = useState(0);
   const [openDialog, setOpenDialog] = useState(false);
+  const [tareaEdit, setTareaEdit] = useState(null);
 
   const user = JSON.parse(localStorage.getItem(userSelected));
   const { state, dispatch } = useContext(UserContext);
@@ -37,6 +38,12 @@ const TaskListContainer = () => {
 
   const handleCloseDialog = () => {
     setOpenDialog(false);
+    setTareaEdit(null);
+  };
+
+  const handleTareaEdit = (t) => {
+    setTareaEdit(t);
+    setOpenDialog(true);
   };
 
   useEffect(() => {
@@ -61,11 +68,13 @@ const TaskListContainer = () => {
       <TaskList
         tareas={tareas}
         getTasksService={_getTasksByUserId}
+        handleTareaEdit={handleTareaEdit}
       />
       <TaskForm
         open={openDialog}
         handleClose={handleCloseDialog}
         getTasksService={_getTasksByUserId}
+        tareaEdit={tareaEdit}
       />
       <Loader
         open={isLoading}

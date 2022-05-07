@@ -1,4 +1,4 @@
-import { useState, useContext, useRef } from 'react';
+import { useState, useContext, useRef, useEffect } from 'react';
 import { TextField } from '@mui/material';
 import DialogCommon from '../../commons/DialogCommon';
 import TaskFormActions from './TaskFormActions';
@@ -6,13 +6,13 @@ import styles from './TaskForm.module.css';
 import SelectCustom from '../../commons/SelectCustom';
 import { formTime } from '../../../constants/FilterConstants';
 import UserContext from '../../../context/UserContext';
-import { addTarea } from '../../../services/TaskService';
-import { httpCreated } from '../../../constants/CommonContants';
-import { initialState, initialStateErr, _objTarea } from './TaskForm.util';
+import { addTarea, updateTareaById } from '../../../services/TaskService';
+import { httpCreated, httpOk } from '../../../constants/CommonContants';
+import { initialState, initialStateErr, _objTarea, _objTareaEdit } from './TaskForm.util';
 import SnackContext from '../../../context/SnackContext';
 
 const TaskForm = (props) => {
-  const { open, handleClose, getTasksService } = props;
+  const { open, handleClose, getTasksService, tareaEdit } = props;
   const [tarea, setTarea] = useState(initialState);
   const [errors, setErrors] = useState(initialStateErr);
   const { state } = useContext(UserContext);
@@ -58,11 +58,24 @@ const TaskForm = (props) => {
     }
   };
 
+  const _editTarea = async (tareaValue) => {
+    const response = await updateTareaById(tareaEdit._id, tareaValue);
+
+    if (response.status === httpOk) {
+      _handleClose();
+      getTasksService();
+      setSnack({ open: true, severity: 'info', msg: '¡Tarea actualizada correctamente!' });
+    } else {
+      setSnack({ open: true, severity: 'error', msg: `¡Error al editar tarea! - ${response?.text}` });
+    }
+  };
+
   const handleAddTarea = () => {
-    const objTarea = _objTarea(tarea, state);
+    const objTarea = tareaEdit ? _objTareaEdit(tarea, tareaEdit) : _objTarea(tarea, state);
 
     if (tarea.title && tarea.description && (tarea.time > 0 && tarea.time <= 120)) {
-      _addTarea(objTarea);
+      const funForm = tareaEdit ? () => _editTarea(objTarea) : () => _addTarea(objTarea);
+      funForm();
     } else {
       setErrors({
         title: tarea.title ? false : true,
@@ -72,9 +85,22 @@ const TaskForm = (props) => {
     }
   };
 
+  const titleForm = tareaEdit ? 'Editar Tarea' : 'Agregar Tarea';
+
+  useEffect(() => {
+    if (tareaEdit) {
+      const newT = {
+        title: tareaEdit.titulo,
+        description: tareaEdit.descripcion,
+        time: tareaEdit.tiempo.programado / 60
+      };
+      setTarea(newT);
+    }
+  }, [tareaEdit]);
+
   return (
     <DialogCommon
-      title='Agregar Tarea'
+      title={titleForm}
       open={open}
       handleClose={_handleClose}
       actions={
@@ -95,6 +121,7 @@ const TaskForm = (props) => {
           onChange={handleChange}
           name='title'
           error={errors.title}
+          disabled={tareaEdit ? true : false}
         />
 
         <TextField
@@ -121,6 +148,7 @@ const TaskForm = (props) => {
             style={{
               width: '100%'
             }}
+            disabled={tareaEdit?.estatus?.id > 1 ? true : false}
           />
 
           <TextField
@@ -133,6 +161,7 @@ const TaskForm = (props) => {
             name='time'
             inputRef={timeTextRef}
             error={errors.time}
+            disabled={tareaEdit?.estatus?.id > 1 ? true : false}
           />
         </div>
       </div>

@@ -26,3 +26,15 @@ export const _objTarea = (tarea, state) => {
     usuario: state._id
   }
 };
+
+export const _objTareaEdit = (tarea, tareaPrev) => {
+  return {
+    descripcion: tarea.description,
+    estatus: tareaPrev.estatus,
+    tiempo: {
+      ...tareaPrev.tiempo,
+      programado: tarea.time * 60
+    }
+  }
+
+};

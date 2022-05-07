@@ -15,7 +15,7 @@ const CardContent = styled('div')(({ theme }) => ({
 }));
 
 const TaskListCard = props => {
-  const { tarea, getTasksService } = props;
+  const { tarea, getTasksService, handleTareaEdit } = props;
 
   const timeShow = tarea.estatus.id === 1 ? convertHMS(tarea.tiempo.programado) : convertHMS(tarea.tiempo.actual);
   const colorBoder = tarea.estatus.id === 1 ? '#00A6FF' : tarea.estatus.id === 2 ? '#FF8C32' : '#4CA22A';
@@ -40,7 +40,7 @@ const TaskListCard = props => {
         className={styles.card_details}
         multiline
         maxRows={4}
-        defaultValue={tarea.descripcion}
+        value={tarea.descripcion}
         disabled
         fullWidth
       />
@@ -49,6 +49,7 @@ const TaskListCard = props => {
       <TaskListCardControls
         tarea={tarea}
         getTasksService={getTasksService}
+        handleTareaEdit={handleTareaEdit}
       />
     </CardContent>
   );

@@ -7,7 +7,7 @@ import SnackContext from '../../../context/SnackContext';
 import styles from './TaskListCardControls.module.css';
 
 const TaskListCardControls = props => {
-  const { tarea, getTasksService } = props;
+  const { tarea, getTasksService, handleTareaEdit } = props;
   const { setSnack } = useContext(SnackContext);
 
   const _deleteTareaById = async () => {
@@ -21,6 +21,10 @@ const TaskListCardControls = props => {
     }
   };
 
+  const _handleTareaEdit = () => {
+    handleTareaEdit(tarea);
+  };
+
   const lblBtnPrimary = tarea.estatus.id === 1 ? 'Iniciar' :
     tarea.estatus.id === 2 ? 'Terminar' : 'Eliminar';
 
@@ -31,7 +35,11 @@ const TaskListCardControls = props => {
     <div>
       <div className={styles.controls_group}>
         <ButtonGroup variant="outlined">
-          <Button>Editar</Button>
+          <Button
+            onClick={_handleTareaEdit}
+          >
+            Editar
+          </Button>
           {
             tarea.estatus.id === 2 && (
               <Button>Reiniciar</Button>

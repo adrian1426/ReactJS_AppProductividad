@@ -13,7 +13,7 @@ const ContainerCards = styled('div')(({ theme }) => ({
 }));
 
 const TaskList = props => {
-  const { tareas, getTasksService } = props;
+  const { tareas, getTasksService, handleTareaEdit } = props;
 
   return (
     <ContainerCards>
@@ -23,6 +23,7 @@ const TaskList = props => {
             key={tarea._id}
             tarea={tarea}
             getTasksService={getTasksService}
+            handleTareaEdit={handleTareaEdit}
           />))
       }
     </ContainerCards>
