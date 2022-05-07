@@ -33,3 +33,35 @@ export const addTarea = async (tarea) => {
     return error;
   }
 };
+
+export const updateTareaById = async (id, tarea) => {
+  try {
+    const response = await fetch(
+      `${api}/tarea/${id}`,
+      {
+        method: 'PUT',
+        body: JSON.stringify(tarea),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const deleteTareaById = async (id) => {
+  try {
+    const response = await fetch(
+      `${api}/tarea/${id}`,
+      { method: 'DELETE' }
+    );
+
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
