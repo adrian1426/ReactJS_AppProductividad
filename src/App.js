@@ -1,5 +1,7 @@
 import AppNav from "./components/commons/AppNav";
+import SnackBar from "./components/commons/SnackBar";
 import UsersListContainer from "./components/users/UsersListContainer";
+import { SnackProvider } from "./context/SnackContext";
 import { useAuth } from './hooks/useAuth';
 import RouterApp from "./router/RouterApp";
 
@@ -12,8 +14,11 @@ function App() {
 
   return (
     <div>
-      <AppNav />
-      <RouterApp />
+      <SnackProvider>
+        <AppNav />
+        <RouterApp />
+        <SnackBar />
+      </SnackProvider>
     </div>
   );
 }

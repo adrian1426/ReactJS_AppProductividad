@@ -9,12 +9,14 @@ import UserContext from '../../../context/UserContext';
 import { addTarea } from '../../../services/TaskService';
 import { httpCreated } from '../../../constants/CommonContants';
 import { initialState, initialStateErr, _objTarea } from './TaskForm.util';
+import SnackContext from '../../../context/SnackContext';
 
 const TaskForm = (props) => {
   const { open, handleClose, getTasksService } = props;
   const [tarea, setTarea] = useState(initialState);
   const [errors, setErrors] = useState(initialStateErr);
   const { state } = useContext(UserContext);
+  const { setSnack } = useContext(SnackContext);
   const timeTextRef = useRef();
 
   const _handleClose = () => {
@@ -50,8 +52,9 @@ const TaskForm = (props) => {
     if (response.status === httpCreated) {
       _handleClose();
       getTasksService();
+      setSnack({ open: true, severity: 'success', msg: '¡Tarea agregada correctamente!' });
     } else {
-      console.log('Error al agregar nueva tarea: ', response);
+      setSnack({ open: true, severity: 'error', msg: `¡Error al agregar tarea! - ${response?.text}` });
     }
   };
 
