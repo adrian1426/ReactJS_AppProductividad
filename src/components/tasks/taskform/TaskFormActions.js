@@ -2,7 +2,7 @@ import { Button } from "@mui/material";
 import styles from './TaskFormActions.module.css';
 
 const TaskFormActions = props => {
-  const { handleClose } = props;
+  const { handleClose, handleAddTarea } = props;
 
   return (
     <div className={styles.actions}>
@@ -20,6 +20,7 @@ const TaskFormActions = props => {
         variant='contained'
         fullWidth
         className={styles.actions_button}
+        onClick={handleAddTarea}
       >
         Guardar
       </Button>

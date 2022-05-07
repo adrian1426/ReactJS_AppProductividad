@@ -64,6 +64,7 @@ const TaskListContainer = () => {
       <TaskForm
         open={openDialog}
         handleClose={handleCloseDialog}
+        getTasksService={_getTasksByUserId}
       />
       <Loader
         open={isLoading}
