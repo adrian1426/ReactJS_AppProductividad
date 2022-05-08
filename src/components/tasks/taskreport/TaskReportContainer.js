@@ -1,60 +1,16 @@
 import { useCallback, useState, useEffect } from 'react';
-import styled from '@emotion/styled';
 import { Typography } from '@mui/material';
-import { BarChart } from 'react-d3-chart-graphs'
 import { httpOk, userSelected } from '../../../constants/CommonContants';
 import { getTasksByUserId } from '../../../services/TaskService';
 import Loader from '../../commons/Loader';
-
-const axesProps = {
-  legend: {
-    xAxis: 'Estatus de tareas',
-    yAxis: 'Cantidad de tareas',
-  },
-  padding: {
-    xAxis: 5,
-    yAxis: 5,
-  },
-  ticksCount: 1,
-  tickFormat: {
-    xAxis: function (value) {
-      return `${value}`;
-    },
-  },
-};
-
-const colorScale = {
-  min: '#BBB',
-  max: '#AAA',
-};
-
-const Searcher = styled('div')(({ theme }) => ({
-  background: theme.palette.common.white,
-  margin: '2%',
-  padding: '10px',
-  display: 'flex',
-  justifyContent: 'space-around',
-  alignItems: 'center'
-}));
+import BarChartReport from '../../commons/BarChartReport';
+import Searcher from '../../commons/Searcher';
+import { trasnformData } from './TaskReportContainer.util';
 
 const TaskReportContainer = () => {
   const [tareas, setTareas] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const user = JSON.parse(localStorage.getItem(userSelected));
-
-  const trasnformData = (data) => {
-    const programado = data.filter(d => d.estatus.id === 1).length;
-    const proceso = data.filter(d => d.estatus.id === 2).length;
-    const finalizado = data.filter(d => d.estatus.id === 3).length;
-
-    const newData = [
-      { title: 'Programado', value: programado },
-      { title: 'En Proceso', value: proceso },
-      { title: 'Finalizado', value: finalizado }
-    ];
-
-    return newData;
-  };
 
   const _getTasksByUserId = useCallback(async () => {
     setIsLoading(true);
@@ -86,11 +42,10 @@ const TaskReportContainer = () => {
         </Typography>
       </Searcher>
 
-      <BarChart
-        axesProps={axesProps}
+      <BarChartReport
+        xAxis='Estatus de tareas'
+        yAxis='Cantidad de tareas'
         data={tareas}
-        colorScale={colorScale}
-        paddingMultiplier={0.24}
       />
 
       <Loader
