@@ -1,16 +1,6 @@
-import styled from "@emotion/styled";
 import TaskListCard from "./TaskListCard";
 import PropTypes from 'prop-types';
-
-const ContainerCards = styled('div')(({ theme }) => ({
-  background: theme.palette.common.white,
-  margin: '2%',
-  padding: '10px',
-  display: 'flex',
-  justifyContent: 'space-around',
-  flexWrap: 'wrap'
-
-}));
+import ContainerCards from "../../commons/styled/ContainerCards";
 
 const TaskList = props => {
   const { tareas, getTasksService, handleTareaEdit } = props;
@@ -31,7 +21,9 @@ const TaskList = props => {
 };
 
 TaskList.propTypes = {
-  tareas: PropTypes.array.isRequired
+  tareas: PropTypes.array.isRequired,
+  getTasksService: PropTypes.func.isRequired,
+  handleTareaEdit: PropTypes.func.isRequired
 };
 
 export default TaskList;

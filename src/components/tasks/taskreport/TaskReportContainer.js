@@ -4,8 +4,8 @@ import { httpOk, userSelected } from '../../../constants/CommonContants';
 import { getTasksByUserId } from '../../../services/TaskService';
 import Loader from '../../commons/Loader';
 import BarChartReport from '../../commons/BarChartReport';
-import Searcher from '../../commons/Searcher';
 import { trasnformData } from './TaskReportContainer.util';
+import Searcher from '../../commons/styled/Searcher';
 
 const TaskReportContainer = () => {
   const [tareas, setTareas] = useState([]);

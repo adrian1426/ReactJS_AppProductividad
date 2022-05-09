@@ -5,7 +5,7 @@ import { statusTarea, timeTask } from '../../../constants/FilterConstants';
 import SelectCustom from '../../commons/SelectCustom';
 import debounce from "just-debounce-it";
 import PropTypes from 'prop-types';
-import Searcher from '../../commons/Searcher';
+import Searcher from '../../commons/styled/Searcher';
 
 const TaskListSearcher = (props) => {
   const { setSearchTitle, setSearchStatus, setSearchTime, setOpenDialog } = props;

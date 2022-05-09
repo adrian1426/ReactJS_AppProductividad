@@ -1,5 +1,5 @@
+import ContainerTasks from "../components/commons/styled/ContainerTasks";
 import TaskReportContainer from "../components/tasks/taskreport/TaskReportContainer";
-import ContainerTasks from "../components/commons/ContainerTasks";
 
 const TaskReportPage = () => {
   return (
