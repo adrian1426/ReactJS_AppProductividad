@@ -18,7 +18,10 @@ const AppNav = () => {
         <Toolbar disableGutters>
           <div className={styles.nav}>
             <div className={styles.nav_menu}>
-              <Typography className={styles.nav_menu_user}>
+              <Typography
+                className={styles.nav_menu_user}
+                sx={{ display: { xs: 'none', md: 'flex' } }}
+              >
                 {user?.nombre} {user?.apellido}
               </Typography>
 
