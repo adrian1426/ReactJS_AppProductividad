@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 const SelectCustom = props => {
@@ -27,6 +28,13 @@ const SelectCustom = props => {
       </Select>
     </FormControl>
   );
+};
+
+SelectCustom.propTypes = {
+  label: PropTypes.string.isRequired,
+  data: PropTypes.array.isRequired,
+  defaultValue: PropTypes.number,
+  style: PropTypes.object
 };
 
 export default SelectCustom;

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Button } from "@mui/material";
 import styles from './TaskFormActions.module.css';
 
@@ -26,6 +27,11 @@ const TaskFormActions = props => {
       </Button>
     </div>
   );
+};
+
+TaskFormActions.propTypes = {
+  handleClose: PropTypes.func.isRequired,
+  handleAddTarea: PropTypes.func.isRequired
 };
 
 export default TaskFormActions;

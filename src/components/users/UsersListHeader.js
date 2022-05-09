@@ -1,13 +1,7 @@
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
-import { styled } from '@mui/material/styles';
 import { Typography } from '@mui/material';
 import styles from './UsersListHeader.module.css';
-
-const Header = styled('header')(({ theme }) => ({
-  backgroundColor: theme.palette.secondary.main,
-  padding: '5px',
-  height: '40px'
-}));
+import Header from '../commons/styled/Header';
 
 const UsersListHeader = () => {
   return (

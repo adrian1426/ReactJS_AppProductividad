@@ -1,4 +1,5 @@
 import { useState, useContext, useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { TextField } from '@mui/material';
 import DialogCommon from '../../commons/DialogCommon';
 import TaskFormActions from './TaskFormActions';
@@ -33,7 +34,7 @@ const TaskForm = (props) => {
     });
   };
 
-  const handlechangeSelectTime = e => {
+  const handleChangeSelectTime = e => {
     setTarea({
       ...tarea,
       time: (e.target.value / 60)
@@ -144,10 +145,8 @@ const TaskForm = (props) => {
           <SelectCustom
             label='Agregar tiempo'
             data={formTime}
-            onChange={handlechangeSelectTime}
-            style={{
-              width: '100%'
-            }}
+            onChange={handleChangeSelectTime}
+            style={{ width: '100%' }}
             disabled={tareaEdit?.estatus?.id > 1 ? true : false}
           />
 
@@ -167,6 +166,13 @@ const TaskForm = (props) => {
       </div>
     </DialogCommon>
   );
+};
+
+TaskForm.propTypes = {
+  open: PropTypes.bool.isRequired,
+  handleClose: PropTypes.func.isRequired,
+  getTasksService: PropTypes.func.isRequired,
+  tareaEdit: PropTypes.object
 };
 
 export default TaskForm;
