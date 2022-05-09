@@ -1,18 +1,10 @@
-import styled from "@emotion/styled";
 import { TextField } from "@mui/material";
 import { convertHMS } from "../../../helpers";
 import styles from './TaskListCard.module.css';
 import TaskListCardControls from "./TaskListCardControls";
 import TaskListCardInfo from "./TaskListCardInfo";
 import PropTypes from 'prop-types';
-
-const CardContent = styled('div')(({ theme }) => ({
-  backgroundColor: theme.palette.common.black,
-  padding: '6px',
-  width: '300px',
-  margin: '5px',
-  borderRadius: '5px'
-}));
+import CardContent from "../../commons/styled/CardContent";
 
 const TaskListCard = props => {
   const { tarea, getTasksService, handleTareaEdit } = props;
@@ -56,7 +48,9 @@ const TaskListCard = props => {
 };
 
 TaskListCard.propTypes = {
-  tarea: PropTypes.object.isRequired
+  tarea: PropTypes.object.isRequired,
+  getTasksService: PropTypes.func.isRequired,
+  handleTareaEdit: PropTypes.func.isRequired
 };
 
 export default TaskListCard;

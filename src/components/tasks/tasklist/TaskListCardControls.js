@@ -104,7 +104,9 @@ const TaskListCardControls = props => {
 };
 
 TaskListCardControls.propTypes = {
-  tarea: PropTypes.object.isRequired
+  tarea: PropTypes.object.isRequired,
+  getTasksService: PropTypes.func.isRequired,
+  handleTareaEdit: PropTypes.func.isRequired
 };
 
 export default TaskListCardControls;
